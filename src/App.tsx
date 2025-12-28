@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
-import { GoodsList } from './GoodsList';
+import { GoodsList } from './components/GoodsList';
 import { Good } from './types/Good';
 import { getAll, get5First, getRedGoods } from './api/goods';
 
@@ -14,7 +14,13 @@ export const App: React.FC = () => {
       <button
         type="button"
         data-cy="all-button"
-        onClick={() => getAll().then(setVisibleGoods)}
+        onClick={() =>
+          getAll()
+            .then(setVisibleGoods)
+            .catch(() => {
+              throw new Error(`Failed to loading data`);
+            })
+        }
       >
         Load all goods
       </button>
