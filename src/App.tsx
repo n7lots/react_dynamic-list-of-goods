@@ -18,7 +18,7 @@ export const App: React.FC = () => {
           getAll()
             .then(setVisibleGoods)
             .catch(() => {
-              throw new Error(`Failed to loading data`);
+              throw new Error('Failed to loading data');
             })
         }
       >
@@ -28,7 +28,13 @@ export const App: React.FC = () => {
       <button
         type="button"
         data-cy="first-five-button"
-        onClick={() => get5First().then(setVisibleGoods)}
+        onClick={() =>
+          get5First()
+            .then(setVisibleGoods)
+            .catch(() => {
+              throw new Error('Failed to loading first 5 goods');
+            })
+        }
       >
         Load 5 first goods
       </button>
@@ -36,7 +42,13 @@ export const App: React.FC = () => {
       <button
         type="button"
         data-cy="red-button"
-        onClick={() => getRedGoods().then(setVisibleGoods)}
+        onClick={() =>
+          getRedGoods()
+            .then(setVisibleGoods)
+            .catch(() => {
+              throw new Error('Failed to loading only red Goods');
+            })
+        }
       >
         Load red goods
       </button>
